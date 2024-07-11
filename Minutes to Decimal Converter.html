@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minutes to Decimal Converter</title>
+  <style>
+    /* General styles */
+    #time_calculator .calculator-box__main {
+      background: #fff;
+      box-shadow: 0 3px 6px rgba(0,0,0,.3);
+      width: 100%;
+      border-radius: 0.6em;
+      padding: 2em;
+      box-sizing: border-box;
+      color: #000;
+    }
+
+    #time_calculator .calculator-box {
+      width: 100%;
+      margin-bottom: 30px;
+    }
+
+    #time_calculator .calculator-operation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #time_calculator .calculator-operation__left,
+    #time_calculator .calculator-operation__right {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    #time_calculator .app-font.calculator-text.calculator-text--large {
+      font-size: 1.3em;
+      padding: 0 0.3em;
+
+      margin-bottom: 1em;
+    }
+
+    #time_calculator .calculator-input {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      flex: 0 0 calc(233.33% - 10px); /* 33.33% width for each input field on larger screens */
+    }
+
+    #time_calculator .calculator-box__main input,
+    #time_calculator .calculator-box__main select {
+      text-align: right;
+      background: #efeff5;
+      border: 0;
+      outline: 0;
+      border-radius: 0.4em;
+      font-size: 1.4em;
+      font-weight: 300;
+      width: 5em;
+      -moz-appearance: textfield;
+    }
+
+    #time_calculator .calculator-operation__right {
+      text-align: end !important;
+    }
+
+    #time_calculator .calculator-button {
+      padding: 10px 20px;
+      background-color: #000;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    #time_calculator .calculator-button:hover {
+      background-color: #EFEFF5;
+      color: #000000;
+    }
+
+    .calculator-button:focus {
+      outline: none;
+      background-color: #000000;
+      color: #FFFFFF;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator-box" id="time_calculator">
+    <div class="calculator-box__main">
+      <div class="calculator-operation">
+        <div class="calculator-operation__left">
+          <div slot="left">
+            <div class="app-font calculator-text calculator-text--large">Enter Hours and Minutes:</div>
+          </div>
+          <div class="calculator-input"><input class="input-hours" placeholder="Hours" type="number" value=""></div>
+          <div class="calculator-input"><input class="input-minutes" placeholder="Minutes" type="number" value=""></div>
+          <div class="app-font calculator-text calculator-text--large">Select Round to Decimals:</div>
+          <div class="calculator-input">
+            <select class="input-rounding">
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select>
+          </div>
+        </div>
+        <div class="calculator-operation__right">
+          <div slot="right">
+            <button class="calculator-button calculator-button-success" onclick="convertToDecimal()">Convert</button>
+            <div>
+              <div class="app-font calculator-text calculator-text--small">(result)</div>
+            </div>
+            <div>
+              <div class="app-font calculator-text calculator-text--large">=</div>
+              <div class="calculator-input"><input class="input-decimal" placeholder="Decimal" type="number" value="" disabled></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="calculator-box__history"></div>
+  </div>
+
+  <script>
+    function convertToDecimal() {
+      const hours = parseFloat(document.querySelector('.input-hours').value);
+      const minutes = parseFloat(document.querySelector('.input-minutes').value);
+      const rounding = parseInt(document.querySelector('.input-rounding').value);
+      const decimalTime = hours + (minutes / 60);
+      const roundedDecimalTime = decimalTime.toFixed(rounding);
+      document.querySelector('.input-decimal').value = roundedDecimalTime;
+    }
+  </script>
+</body>
+</html>
